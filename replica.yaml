@@ -34,8 +34,8 @@ spec:
           readinessProbe:
             exec:
               command:
-              - echo hi
-              - touch yellow.sh
+              - echo 
+              - HI
           resources:
             requests:
               memory: "64Mi"
