@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: 
+  name: my-rs
+  labels: 
+    app: rs-dev
+  namespace: dev
+  annotations: 
+    ecrimage: 326804802312.dkr.ecr.ap-southeast-2.amazonaws.com/dev/yellowapp
+spec:
+  minReadySeconds: 10
+  replicas: 4
+  selector: 
+    matchLabels:
+      app: yellowapp-pod
+  template:
+    metadata: 
+      name: podlevellabels
+      labels: 
+        app: yellowapp-pod
+    spec: 
+      containers:
+        - name: my-co
+          image: 326804802312.dkr.ecr.ap-southeast-2.amazonaws.com/dev/yellowapp:latest
+          ports:
+            - containerPort: 80
+          startupProbe: 
+            httpGet: 
+              path: /
+              port: 80
+          livenessProbe:
+            tcpSocket:
+              port: 80
+          readinessProbe:
+            exec:
+              command:
+              - echo hi
+              - touch yellow.sh
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "124Mi"
+              cpu: "500m"
