@@ -5,8 +5,8 @@ metadata:
   labels: 
     app: rs-dev
   namespace: dev
-  annotations: 
-    ecrimage: 326804802312.dkr.ecr.ap-southeast-2.amazonaws.com/dev/yellowapp
+  # annotations: 
+   # ecrimage: 326804802312.dkr.ecr.ap-southeast-2.amazonaws.com/dev/yellowapp
 spec:
   minReadySeconds: 10
   replicas: 4
@@ -21,7 +21,7 @@ spec:
     spec: 
       containers:
         - name: my-co
-          image: 326804802312.dkr.ecr.ap-southeast-2.amazonaws.com/dev/yellowapp:latest
+          image: sudeer0474/cssimages:barber
           ports:
             - containerPort: 80
           startupProbe: 
